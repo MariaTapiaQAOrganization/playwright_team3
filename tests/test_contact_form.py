@@ -13,7 +13,7 @@ def test_contact_required_message_empty(page):
     expect(page.get_by_text("El mensaje es obligatorio")).to_be_visible()
 
 
-@pytest.mark.skip(reason="Bug: contact form accepts invalid email - KAN-35")
+@pytest.mark.skip(reason="Skipped due to known bug KAN-15: Contact page accepts invalid email formats and submits the form successfully - https://equipo3qa.atlassian.net/browse/KAN-15")
 def test_contact_invalid_email(page):
     page.goto("https://web-qa.dev.adalab.es/")
     page.get_by_role("link", name="Contacto").click()
