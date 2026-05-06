@@ -2,9 +2,9 @@ from playwright.sync_api import Page, expect
 
 def test_visit_menu_links(page:Page):
     
-    print("Given the user opens the page Inicio | Vida Verde")    # a la pagina de inicio para POM
+    print("Given the user opens the page Inicio | Vida Verde") 
     page.goto("https://web-qa.dev.adalab.es/")
-    print("Then they should see the title “Vida Verde”")   # a la pagina de inicio para POM
+    print("Then they should see the title “Vida Verde”")  
     expect(page.get_by_role("heading", name="Vida Verde")).to_be_visible()
 
     print("When they click on “About us”")
