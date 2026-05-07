@@ -34,7 +34,7 @@ def test_contact_submit_the_form_with_all_required_fields_filled_out(page: Page)
     page.get_by_role("textbox", name="Mensaje *").fill("Test message")
     print("And the user clicks on the submit button")
     page.get_by_role("button", name="Enviar Mensaje").click()
-
+    print("Then the user should see the success message “¡Mensaje enviado con éxito!”")
     expect(page.get_by_text("¡Mensaje enviado con éxito!")).to_be_visible()
 
 
@@ -47,10 +47,9 @@ def test_contact_submit_the_form_with_required_name_field_left_empty(page: Page)
     page.get_by_role("textbox", name="Mensaje *").fill("Test message")
     print("And the user clicks on the submit button")
     page.get_by_role("button", name="Enviar Mensaje").click()
-    
+    print("Then the user should see the error message “El nombre es obligatorio”")
     expect(page.get_by_text("El nombre es obligatorio")).to_be_visible()
 
-@pytest.mark.skip(reason="Contact page - the form can be submitted even when the email field is left empty- https://equipo3qa.atlassian.net/browse/KAN-13")
 def test_contact_submit_the_form_with_required_email_field_left_empty(page: Page):
     print("Given user visit contact page")
     page.goto("https://web-qa.dev.adalab.es/contact")
@@ -60,5 +59,5 @@ def test_contact_submit_the_form_with_required_email_field_left_empty(page: Page
     page.get_by_role("textbox", name="Mensaje *").fill("Test message")
     print("And the user clicks on the submit button")
     page.get_by_role("button", name="Enviar Mensaje").click()
-
+    print("Then the user should see the error message “El email es obligatorio”")
     expect(page.get_by_text("El email es obligatorio")).to_be_visible()
