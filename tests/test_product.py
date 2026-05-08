@@ -1,4 +1,6 @@
 from playwright.sync_api import Page, expect
+from pages.products_page import ProductsPage
+
 
 def test_visit(page: Page):
     print("When the user opens the products page")
@@ -14,18 +16,19 @@ def test_visit(page: Page):
     expect(page.get_by_label("Catálogo de productos").get_by_role("list")).to_contain_text("35.00 €")
 
 
-def test_complete_purchase_valid_data(page: Page):    
+def test_complete_purchase_valid_data(page: Page):    #GRIMANESA
     print("Given the user opens the products page")
-    page.goto("https://web-qa.dev.adalab.es/products")
+    products_page = ProductsPage(page)
+    products_page.open_products_page()
 
     print("When the user filters by name “palas”")
-    page.get_by_placeholder("Buscar productos...").fill("palas")
+    products_page.search_product("palas")
 
     print("And the user adds the product to the cart")
-    page.get_by_label("Añadir Juego de Palas al carrito").click()
+    products_page.add_product_to_cart("Juego de Palas")
 
     print("And the user clicks on Finalizar Compra")
-    page.get_by_role("link", name="Finalizar Compra").first.click()
+    products_page.click_checkout()
 
     print("Then the user should see the order summary")
     expect(page.get_by_text("juego de palas")).to_be_visible()
@@ -38,16 +41,18 @@ def test_complete_purchase_valid_data(page: Page):
     expect(summary.get_by_text("24.35 €")).to_be_visible()
 
     print("And the user clicks on proceed to payment")
-    page.get_by_role("link", name="Proceder al Pago").click()
+    products_page.click_proceed_to_payment()
 
     print("When the user fills the checkout form")
-    page.get_by_placeholder("María González").fill("Maria Diaz")
-    page.get_by_placeholder("maria@example.com").fill("test@gmail.com")
-    page.get_by_placeholder("Rúa da Raíña, 25, Lugo, 27001").fill("Calle Aragón, 25, Madrid")
-    page.get_by_placeholder("4242 4242 4242 4242").fill("4242424242424242")
+    products_page.fill_checkout_form(
+    "Maria Diaz",
+    "test@gmail.com",
+    "Calle Aragón, 25, Madrid",
+    "4242424242424242"
+    )
     
     print("And the user completes the purchase")
-    page.get_by_role("button", name="Completar Compra").click()
+    products_page.complete_purchase()
 
     print("Then the user should see the success message")
-    expect(page.get_by_text("Compra Realizada con Éxito")).to_be_visible()
+    products_page.verify_success_message("Compra Realizada con Éxito")
