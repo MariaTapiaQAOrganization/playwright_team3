@@ -48,6 +48,8 @@ def test_contact_invalid_email(page: Page): #GRIMANESA
 
     expect(page.get_by_text("El formato del email no es válido")).to_be_visible()
 
+    
+
 
 def test_contact_submit_the_form_with_required_name_field_left_empty(page: Page): #TEST MARIA
     
