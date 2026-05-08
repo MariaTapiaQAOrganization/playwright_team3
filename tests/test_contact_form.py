@@ -1,6 +1,7 @@
 
 from playwright.sync_api import Page, expect
-from pages.contact_page import ContactPage
+from playwright_team3.pages.contact_page import ContactPage
+
 
 def test_contact_submit_the_form_with_all_required_fields_filled_out(page: Page): #TEST MARIA
 
@@ -12,8 +13,8 @@ def test_contact_submit_the_form_with_all_required_fields_filled_out(page: Page)
     print("When the user enters Marta Diaz in the name field")
     contact_page.fill_contact_name("Marta Diaz")
 
-    print("And the user enters test_automation@test.com in the email field")
-    contact_page.fill_contact_name("test_automation@test.com")
+    print("And the user enters test@gmail.com in the email field")
+    contact_page.fill_contact_email("test@gmail.com")
     
     print("And the user enters Test message in the message field")
     contact_page.fill_contact_message("Test message")
@@ -56,7 +57,7 @@ def test_contact_submit_the_form_with_required_name_field_left_empty(page: Page)
     contact_page.open_contact_page()
 
     print("When the user enters test@gmail.com in the email field")
-    contact_page.fill_contact_name("test@gmail.com")
+    contact_page.fill_contact_email("test@gmail.com")
     
     print("And the user enters Test message in the message field")
     contact_page.fill_contact_message("test message")

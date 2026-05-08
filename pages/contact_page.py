@@ -21,4 +21,4 @@ class ContactPage:
         self.page.get_by_role("button", name="Enviar Mensaje").click()
 
     def verify_message_form(self,text):
-        expect(self.page.get_by_role("heading", name=text)).to_be_visible()
+        expect(self.page.get_by_text(text)).to_be_visible()
