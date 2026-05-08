@@ -27,21 +27,23 @@ def test_contact_submit_the_form_with_all_required_fields_filled_out(page: Page)
 
 
 
-def test_contact_required_message_empty(page: Page):
-    page.goto("https://web-qa.dev.adalab.es/contact")
-    page.get_by_role("textbox", name="Nombre *").fill("Marta Díaz")
-    page.get_by_role("textbox", name="Email *").fill("test@gmail.com")
-    page.get_by_role("button", name="Enviar Mensaje").click()
+def test_contact_required_message_empty(page: Page): #GRIMANESA
+    contact_page = ContactPage(page)
+    contact_page.open_contact_page()
+    contact_page.fill_contact_name("Marta Díaz")
+    contact_page.fill_contact_email("test@gmail.com")
+    contact_page.press_send_contact()
 
     expect(page.get_by_text("El mensaje es obligatorio")).to_be_visible()
 
 
-def test_contact_invalid_email(page: Page):
-    page.goto("https://web-qa.dev.adalab.es/contact")
-    page.get_by_role("textbox", name="Nombre *").fill("Marta Diaz")
-    page.get_by_role("textbox", name="Email *").fill("email")
-    page.get_by_role("textbox", name="Mensaje *").fill("Mensaje de prueba")
-    page.get_by_role("button", name="Enviar Mensaje").click()
+def test_contact_invalid_email(page: Page): #GRIMANESA
+    contact_page = ContactPage(page)
+    contact_page.open_contact_page()
+    contact_page.fill_contact_name("Marta Diaz")
+    contact_page.fill_contact_email("email")
+    contact_page.fill_contact_message("Mensaje de prueba")
+    contact_page.press_send_contact()
 
     expect(page.get_by_text("El formato del email no es válido")).to_be_visible()
 
