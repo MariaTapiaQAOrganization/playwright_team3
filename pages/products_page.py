@@ -10,6 +10,15 @@ class ProductsPage:
 
     def search_product(self, product_name): #GRIMANESA
         self.page.get_by_placeholder("Buscar productos...").fill(product_name)
+
+    def filter_by_category(self, category):  #GRIMANESA
+        self.page.get_by_label("Categoría").select_option(category)
+
+    def filter_by_min_price(self, min_price):  #GRIMANESA
+        self.page.get_by_placeholder("Min €").fill(min_price)
+
+    def filter_by_max_price(self, max_price):  #GRIMANESA
+        self.page.get_by_placeholder("Max €").fill(max_price)
     
     def add_product_to_cart(self, product_name):  #GRIMANESA
         self.page.get_by_label(f"Añadir {product_name} al carrito").click()
