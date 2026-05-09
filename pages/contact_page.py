@@ -22,3 +22,4 @@ class ContactPage:
 
     def verify_message_form(self,text):
         expect(self.page.get_by_text(text)).to_be_visible()
+    

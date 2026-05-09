@@ -9,7 +9,9 @@ class ProductsPage:
         self.page.goto(self.url)
 
     def search_product(self, product_name): #GRIMANESA
-        self.page.get_by_placeholder("Buscar productos...").fill(product_name)
+        search_input = self.page.get_by_placeholder("Buscar productos...")
+        search_input.wait_for(state="visible")
+        search_input.fill(product_name)
 
     def filter_by_category(self, category):  #GRIMANESA
         self.page.get_by_label("Categoría").select_option(category)
@@ -22,6 +24,12 @@ class ProductsPage:
     
     def add_product_to_cart(self, product_name):  #GRIMANESA
         self.page.get_by_label(f"Añadir {product_name} al carrito").click()
+
+    def clear_filter(self):
+        self.page.get_by_role("button", name="Quitar filtros y ver todos").click()
+
+    def go_to_cart(self):  #MARIA
+        self.page.get_by_role("link", name="Carrito de compra").click() 
 
     def click_checkout(self):  #GRIMANESA
         self.page.get_by_role("link", name="Finalizar Compra").first.click()
