@@ -1,5 +1,6 @@
 from playwright.sync_api import Page, expect
 from pages.products_page import ProductsPage
+from pages.checkout_page import CheckoutPage
 
 
 def test_visit(page: Page):
@@ -19,6 +20,7 @@ def test_visit(page: Page):
 def test_complete_purchase_valid_data(page: Page):    #GRIMANESA
     print("Given the user opens the products page")
     products_page = ProductsPage(page)
+    checkout_page = CheckoutPage(page)
     products_page.open_products_page()
 
     print("When the user filters by name “palas”")
@@ -44,15 +46,13 @@ def test_complete_purchase_valid_data(page: Page):    #GRIMANESA
     products_page.click_proceed_to_payment()
 
     print("When the user fills the checkout form")
-    products_page.fill_checkout_form(
-    "Maria Diaz",
-    "test@gmail.com",
-    "Calle Aragón, 25, Madrid",
-    "4242424242424242"
-    )
+    checkout_page.fill_name("Maria Diaz")
+    checkout_page.fill_email("test@gmail.com")
+    checkout_page.fill_address("Calle Aragón, 25, Madrid")
+    checkout_page.fill_card("4242424242424242")
     
     print("And the user completes the purchase")
-    products_page.complete_purchase()
+    checkout_page.complete_purchase()
 
     print("Then the user should see the success message")
     products_page.verify_success_message("Compra Realizada con Éxito")
