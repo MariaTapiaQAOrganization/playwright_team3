@@ -3,8 +3,39 @@ from playwright.sync_api import Page, expect
 class ProductsPage:
     def __init__(self, page: Page):
         self.page = page
+        self.title = "Catálogo de Productos"
         self.url = "https://web-qa.dev.adalab.es/products"
-    
+
+
+
+    def verify_products_title(self):  #KARELIA
+        expect(self.page.locator("h1")).to_contain_text(self.title)
+
+    def verify_products_url(self):   #KARELIA
+        expect(self.page).to_have_url(self.url)
+
+
+    def verify_product_category(self):   #KARELIA
+        expect(self.page.get_by_label(self.title).get_by_role("list")).to_contain_text("Plantas")
+
+    def verify_product_name(self):   #KARELIA
+        expect(self.page.get_by_label(self.title).get_by_role("list")).to_contain_text("Ficus Lyrata")
+
+    def verify_product_price(self):   #KARELIA
+        expect(self.page.get_by_label(self.title).get_by_role("list")).to_contain_text("35.00 €")
+
+    def visit_product(self):   #KARELIA
+        self.page.goto(self.url)
+
+    def fill_name_manzana(self):   #KARELIA
+        self.page.get_by_role("searchbox", name="Nombre").fill("manzana")
+
+    def message_no_results(self):    #KARELIA
+        expect(self.page.get_by_text("No se encontraron productos")).to_be_visible()
+
+
+
+
     def open_products_page(self): #GRIMANESA
         self.page.goto(self.url)
 
@@ -48,3 +79,5 @@ class ProductsPage:
 
     def verify_success_message(self, text):  #GRIMANESA
         expect(self.page.get_by_text(text)).to_be_visible()
+
+ 

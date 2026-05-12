@@ -1,31 +1,59 @@
 from playwright.sync_api import Page, expect
+from pages.about_us_page import AboutUsPage
+from pages.components.menu import Menu
+from pages.contact_page import ContactPage
+from pages.home_page import HomePage
+from pages.products_page import ProductsPage
 
-def test_visit_menu_links(page:Page):
+
+#KARELIA scrum-36
+
+def test_visit_menu_links(page:Page):  
     
+    home_page = HomePage(page)
+    menu = Menu(page)
+    about_us_page = AboutUsPage(page)
+    products_page = ProductsPage(page)
+    contact_page = ContactPage(page)
+
+#HOMEPAGE
     print("Given the user opens the page Inicio | Vida Verde") 
-    page.goto("https://web-qa.dev.adalab.es/")
-    print("Then they should see the title “Vida Verde”")  
-    expect(page.get_by_role("heading", name="Vida Verde")).to_be_visible()
+    home_page.open_home_page()
 
+    print("Then they should see the title “Vida Verde”")  
+    home_page.verify_home_page_title()
+
+#ABOUT US
     print("When they click on “About us”")
-    page.get_by_role("link", name="Quiénes Somos").click()
+    menu.visit_menu_about_us()
+
     print("Then they should see the title “About us”")
-    expect(page.get_by_role("heading", name="Quiénes Somos")).to_be_visible()
+    about_us_page.verify_about_us_page_title()
+
     print("And they should see the URL Quiénes Somos | Vida Verde")
-    expect(page).to_have_url("https://web-qa.dev.adalab.es/about")
-    
+    about_us_page.verify_about_us_page_url()
+
+#PRODUCTS
     print("When they click on “Products”")
-    page.get_by_role("link", name="Productos").click()
+    menu.visit_menu_products()
+
     print("Then they should see the title “Product Catalogue”")
-    expect(page.locator("h1")).to_contain_text("Catálogo de Productos")
+    products_page.verify_products_title()
+
     print("And they should see the URL Nuestros Productos | Vida Verde")
-    expect(page).to_have_url("https://web-qa.dev.adalab.es/products")
+    products_page.verify_products_url()
+
+
+#CONTACT
 
     print("When they click on “Contact”")
-    page.get_by_role("link", name="Contacto").click()
+    menu.visit_menu_contact()
+
     print("Then they should see the title “Contact us”")
-    expect(page.locator("h1")).to_contain_text("Contáctanos")
+    contact_page.verify_contact_title()
+    
     print("And they should see the URL Contáctanos | Vida Verde")
-    expect(page).to_have_url("https://web-qa.dev.adalab.es/contact")
+    contact_page.verify_contact_url()
+
 
     
