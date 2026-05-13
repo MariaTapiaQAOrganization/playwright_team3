@@ -21,4 +21,4 @@ def test_filter_product_by_name_category_and_price(page: Page):  #GRIMANESA
     products_page.filter_by_max_price("25")
     
     print("Then the user should see Regadera Metálica")
-    expect(page.get_by_text("Regadera Metálica")).to_be_visible()
+    products_page.verify_products_result("Regadera Metálica")

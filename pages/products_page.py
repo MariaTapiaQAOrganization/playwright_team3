@@ -79,5 +79,8 @@ class ProductsPage:
 
     def verify_success_message(self, text):  #GRIMANESA
         expect(self.page.get_by_text(text)).to_be_visible()
+    
+    def verify_products_result(self, product_name):  #GRIMANESA
+        expect(self.page.get_by_text(product_name)).to_be_visible()
 
  
