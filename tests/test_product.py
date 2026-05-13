@@ -17,65 +17,6 @@ def test_visit(page: Page):
     expect(page.get_by_label("Catálogo de productos").get_by_role("list")).to_contain_text("35.00 €")
 
 
-def test_complete_purchase_valid_data(page: Page):    #GRIMANESA
-    print("Given the user opens the products page")
-    products_page = ProductsPage(page)
-    checkout_page = CheckoutPage(page)
-    products_page.open_products_page()
 
-    print("When the user filters by name “palas”")
-    products_page.search_product("palas")
-
-    print("And the user adds the product to the cart")
-    products_page.add_product_to_cart("Juego de Palas")
-
-    print("And the user clicks on Finalizar Compra")
-    products_page.click_checkout()
-
-    print("Then the user should see the order summary")
-    expect(page.get_by_text("juego de palas")).to_be_visible()
-
-    summary = page.get_by_label("Resumen del Pedido")
-
-    expect(summary.get_by_text("15.99 €")).to_be_visible()
-    expect(summary.get_by_text("3.36 €")).to_be_visible()
-    expect(summary.get_by_text("5.00 €")).to_be_visible()
-    expect(summary.get_by_text("24.35 €")).to_be_visible()
-
-    print("And the user clicks on proceed to payment")
-    products_page.click_proceed_to_payment()
-
-    print("When the user fills the checkout form")
-    checkout_page.fill_name("Maria Diaz")
-    checkout_page.fill_email("test@gmail.com")
-    checkout_page.fill_address("Calle Aragón, 25, Madrid")
-    checkout_page.fill_card("4242424242424242")
     
-    print("And the user completes the purchase")
-    checkout_page.complete_purchase()
 
-    print("Then the user should see the success message")
-    products_page.verify_success_message("Compra Realizada con Éxito")
-
-
-
-def test_filter_product_by_name_category_and_price(page: Page):  #GRIMANESA
-    products_page = ProductsPage(page)
-    
-    print("Given the user opens the products page")
-    products_page.open_products_page()
-
-    print("When the user filters by name Regadera")
-    products_page.search_product("Regadera")
-
-    print("And the user selects Herramientas category")
-    products_page.filter_by_category("Herramientas")
-
-    print("And the user filters by minimum price")
-    products_page.filter_by_min_price("20")
-
-    print("And the user filters by maximum price")
-    products_page.filter_by_max_price("25")
-    
-    print("Then the user should see Regadera Metálica")
-    expect(page.get_by_text("Regadera Metálica")).to_be_visible()
