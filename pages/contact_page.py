@@ -4,6 +4,13 @@ class ContactPage:
     def __init__(self, page: Page):
         self.page = page
         self.url = "https://web-qa.dev.adalab.es/contact"
+        self.title = "Contáctanos"
+
+    def verify_contact_title(self):    #KARELIA
+        expect(self.page.locator("h1")).to_contain_text(self.title)
+
+    def verify_contact_url(self):   #KARELIA
+        expect(self.page).to_have_url(self.url)
 
     def open_contact_page(self):
          self.page.goto(self.url)
