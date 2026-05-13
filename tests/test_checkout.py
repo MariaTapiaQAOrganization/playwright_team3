@@ -3,6 +3,7 @@ from pages.products_page import ProductsPage
 from pages.checkout_page import CheckoutPage
 from pages.cart_page import CartPage
 
+
 def test_checkout_with_empty_card_details(page: Page): #MARÍA
 
     products_page = ProductsPage(page)
@@ -78,3 +79,45 @@ def test_checkout_invalid_card (page: Page): #MARIA
 
     print ("should see an error message regarding the card") 
     checkout_page.verify_card_error_message()
+
+
+
+def test_complete_purchase_valid_data(page: Page):    #GRIMANESA
+    print("Given the user opens the products page")
+    products_page = ProductsPage(page)
+    checkout_page = CheckoutPage(page)
+    products_page.open_products_page()
+
+    print("When the user filters by name “palas”")
+    products_page.search_product("palas")
+
+    print("And the user adds the product to the cart")
+    products_page.add_product_to_cart("Juego de Palas")
+
+    print("And the user clicks on Finalizar Compra")
+    products_page.click_checkout()
+
+    print("Then the user should see the order summary")
+    expect(page.get_by_text("juego de palas")).to_be_visible()
+
+    summary = page.get_by_label("Resumen del Pedido")
+
+    expect(summary.get_by_text("15.99 €")).to_be_visible()
+    expect(summary.get_by_text("3.36 €")).to_be_visible()
+    expect(summary.get_by_text("5.00 €")).to_be_visible()
+    expect(summary.get_by_text("24.35 €")).to_be_visible()
+
+    print("And the user clicks on proceed to payment")
+    products_page.click_proceed_to_payment()
+
+    print("When the user fills the checkout form")
+    checkout_page.fill_name("Maria Diaz")
+    checkout_page.fill_email("test@gmail.com")
+    checkout_page.fill_address("Calle Aragón, 25, Madrid")
+    checkout_page.fill_card("4242424242424242")
+    
+    print("And the user completes the purchase")
+    checkout_page.complete_purchase()
+
+    print("Then the user should see the success message")
+    products_page.verify_success_message("Compra Realizada con Éxito")
