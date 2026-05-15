@@ -36,4 +36,16 @@ class CheckoutPage:                  #MARIA
     def verify_card_error_message (self):
           expect(self.page.get_by_text("Tarjeta de crédito no válida.")).to_be_visible()
 
+    
+    def verify_order_summary_product(self, product_name):   #GRIMANESA
+        expect(self.page.get_by_text(product_name)).to_be_visible()
+
+    def verify_order_summary_prices(self, price, vat, shipping, total):  #GRIMANESA
+        summary = self.page.get_by_label("Resumen del Pedido")
+
+        expect(summary.get_by_text(price)).to_be_visible()
+        expect(summary.get_by_text(vat)).to_be_visible()
+        expect(summary.get_by_text(shipping)).to_be_visible()
+        expect(summary.get_by_text(total)).to_be_visible()
+
 

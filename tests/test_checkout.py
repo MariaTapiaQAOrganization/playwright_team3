@@ -2,6 +2,7 @@ from playwright.sync_api import Page, expect
 from pages.products_page import ProductsPage
 from pages.checkout_page import CheckoutPage
 from pages.cart_page import CartPage
+from pages.confirmation_page import ConfirmationPage
 
 
 def test_checkout_with_empty_card_details(page: Page): #MARÍA
@@ -84,8 +85,11 @@ def test_checkout_invalid_card (page: Page): #MARIA
 
 def test_complete_purchase_valid_data(page: Page):    #GRIMANESA
     print("Given the user opens the products page")
+    
     products_page = ProductsPage(page)
     checkout_page = CheckoutPage(page)
+    confirmation_page = ConfirmationPage(page)
+
     products_page.open_products_page()
 
     print("When the user filters by name “palas”")
@@ -98,14 +102,14 @@ def test_complete_purchase_valid_data(page: Page):    #GRIMANESA
     products_page.click_checkout()
 
     print("Then the user should see the order summary")
-    expect(page.get_by_text("juego de palas")).to_be_visible()
+    checkout_page.verify_order_summary_product("juego de palas")
 
-    summary = page.get_by_label("Resumen del Pedido")
-
-    expect(summary.get_by_text("15.99 €")).to_be_visible()
-    expect(summary.get_by_text("3.36 €")).to_be_visible()
-    expect(summary.get_by_text("5.00 €")).to_be_visible()
-    expect(summary.get_by_text("24.35 €")).to_be_visible()
+    checkout_page.verify_order_summary_prices(
+        "15.99 €",
+        "3.36 €",
+        "5.00 €",
+        "24.35 €"
+    )
 
     print("And the user clicks on proceed to payment")
     products_page.click_proceed_to_payment()
@@ -120,4 +124,4 @@ def test_complete_purchase_valid_data(page: Page):    #GRIMANESA
     checkout_page.complete_purchase()
 
     print("Then the user should see the success message")
-    products_page.verify_success_message("Compra Realizada con Éxito")
+    confirmation_page.verificar_compra_realizada()
