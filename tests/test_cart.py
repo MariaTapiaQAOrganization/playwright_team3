@@ -36,10 +36,19 @@ def test_cart_remove_items_from_the_cart_and_view_summary(page:Page):
     cart_page.verify_item_not_visible("Ficus Lyrata")
 
     print("then the user should see the update summary")
-    cart_page.verify_item_visible("Tijeras de Podar")
-    cart_page.verify_summary("18.50 €", "3.88 €", "5.00 €", "27.38 €")
+    cart_page.verify_order_summary("Resumen del pedido")
 
+    print("pursache subtotal 18,50 €")
+    cart_page.verify_pursache_subtotal("Productos (1)18.50 €")
 
+    print("VAT 3,88 €")
+    cart_page.verify_VAT("3.88 €")
+
+    print("total shipping cost 5 €")
+    cart_page.verify_shipping("Envío 5.00 €")
+
+    print("total pursache 27.38 €")
+    cart_page.verify_total_price("Total 27.38 €")
 
 def test_add_view_summary_and_empty(page: Page):     #KARELIA scrum-46
 

@@ -12,18 +12,35 @@ class CartPage:
     def remove_product(self, product_name):
         self.page.get_by_role("button", name=f"Eliminar {product_name} del").click()
 
+    def verify_order_summary(self, text):
+        expect(self.page.get_by_text(text)).to_be_visible()
+
     def verify_item_not_visible(self, product_name):
          expect(self.page.get_by_text(product_name)).not_to_be_visible()
     
     def verify_item_visible(self, product_name):
         expect(self.page.get_by_text(product_name)).to_be_visible()
 
-    def verify_summary(self, price, vat, shipping, total):
-        summary = self.page.get_by_label("Resumen del Pedido")
-        expect(summary.get_by_text(price)).to_be_visible()
-        expect(summary.get_by_text(vat)).to_be_visible()
-        expect(summary.get_by_text(shipping)).to_be_visible()
-        expect(summary.get_by_text(total)).to_be_visible()
+    def verify_category_name(self, category_name):
+        expect(self.page.get_by_text(category_name)).to_be_visible()
+
+    def verify_price(self, price):
+        expect(self.page.get_by_text(price)).to_be_visible()
+
+    def verify_total_price(self, total):
+        expect(self.page.get_by_text(total)).to_be_visible()
+
+    def verify_number_products(self, amount):
+        expect(self.page.locator(".cart-item")).to_have_count(amount)
+
+    def verify_pursache_subtotal(self, subtotal):
+        expect(self.page.get_by_text(subtotal)).to_be_visible()
+
+    def verify_VAT(self, VAT):
+        expect(self.page.get_by_text("VAT (21%)"+VAT)).to_be_visible()
+
+    def verify_shipping(self, shipping):
+        expect(self.page.get_by_text(shipping)).to_be_visible()
 
     ###KARELIA.  
 
