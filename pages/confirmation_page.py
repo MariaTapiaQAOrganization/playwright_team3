@@ -8,5 +8,5 @@ class ConfirmationPage:  #GRIMANESA
         self.page = page
         self.url = "https://web-qa.dev.adalab.es/confirmation"
     
-    def verificar_compra_realizada(self):
+    def verify_purchase_completed(self):
         expect(self.page.get_by_role("heading", name="¡Compra Realizada con Éxito!")).to_be_visible()

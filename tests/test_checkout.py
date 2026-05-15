@@ -89,6 +89,7 @@ def test_complete_purchase_valid_data(page: Page):    #GRIMANESA
     products_page = ProductsPage(page)
     checkout_page = CheckoutPage(page)
     confirmation_page = ConfirmationPage(page)
+    cart_page = CartPage(page)
 
     products_page.open_products_page()
 
@@ -99,7 +100,7 @@ def test_complete_purchase_valid_data(page: Page):    #GRIMANESA
     products_page.add_product_to_cart("Juego de Palas")
 
     print("And the user clicks on Finalizar Compra")
-    products_page.click_checkout()
+    cart_page.click_finish_purchase()
 
     print("Then the user should see the order summary")
     checkout_page.verify_order_summary_product("juego de palas")
@@ -112,7 +113,7 @@ def test_complete_purchase_valid_data(page: Page):    #GRIMANESA
     )
 
     print("And the user clicks on proceed to payment")
-    products_page.click_proceed_to_payment()
+    cart_page.click_checkout()
 
     print("When the user fills the checkout form")
     checkout_page.fill_name("Maria Diaz")
@@ -124,4 +125,4 @@ def test_complete_purchase_valid_data(page: Page):    #GRIMANESA
     checkout_page.complete_purchase()
 
     print("Then the user should see the success message")
-    confirmation_page.verificar_compra_realizada()
+    confirmation_page.verify_purchase_completed()

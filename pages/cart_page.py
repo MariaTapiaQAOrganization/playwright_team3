@@ -59,7 +59,8 @@ class CartPage:
         self.page.get_by_role("button", name="Vaciar Carrito").click()
         expect(self.page.get_by_text("Tu carrito está vacío")).to_be_visible()
 
-    
+    def click_finish_purchase(self):
+        self.page.get_by_role("link", name="Finalizar Compra").click()
 
 
 
