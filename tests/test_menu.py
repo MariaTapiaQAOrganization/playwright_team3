@@ -6,9 +6,9 @@ from pages.home_page import HomePage
 from pages.products_page import ProductsPage
 
 
-#KARELIA scrum-36
 
-def test_visit_menu_links(page:Page):  
+
+def test_visit_menu_links(page:Page):  #KARELIA scrum-36
     
     home_page = HomePage(page)
     menu = Menu(page)
@@ -16,14 +16,12 @@ def test_visit_menu_links(page:Page):
     products_page = ProductsPage(page)
     contact_page = ContactPage(page)
 
-#HOMEPAGE
     print("Given the user opens the page Inicio | Vida Verde") 
     home_page.open_home_page()
 
     print("Then they should see the title “Vida Verde”")  
     home_page.verify_home_page_title()
 
-#ABOUT US
     print("When they click on “About us”")
     menu.visit_menu_about_us()
 
@@ -33,7 +31,6 @@ def test_visit_menu_links(page:Page):
     print("And they should see the URL Quiénes Somos | Vida Verde")
     about_us_page.verify_about_us_page_url()
 
-#PRODUCTS
     print("When they click on “Products”")
     menu.visit_menu_products()
 
@@ -42,9 +39,6 @@ def test_visit_menu_links(page:Page):
 
     print("And they should see the URL Nuestros Productos | Vida Verde")
     products_page.verify_products_url()
-
-
-#CONTACT
 
     print("When they click on “Contact”")
     menu.visit_menu_contact()
