@@ -14,21 +14,17 @@ class ProductsPage:
     def verify_products_url(self):   #KARELIA
         expect(self.page).to_have_url(self.url)
 
+    def verify_product_category(self, category):   #KARELIA
+        expect(self.page.get_by_label(self.title).get_by_role("list")).to_contain_text(category)
 
-    def verify_product_category(self):   #KARELIA
-        expect(self.page.get_by_label(self.title).get_by_role("list")).to_contain_text("Plantas")
+    def verify_product_name(self, product_name):   #KARELIA
+        expect(self.page.get_by_label(self.title).get_by_role("list")).to_contain_text(product_name)
 
-    def verify_product_name(self):   #KARELIA
-        expect(self.page.get_by_label(self.title).get_by_role("list")).to_contain_text("Ficus Lyrata")
-
-    def verify_product_price(self):   #KARELIA
-        expect(self.page.get_by_label(self.title).get_by_role("list")).to_contain_text("35.00 €")
-
-    def visit_product(self):   #KARELIA
-        self.page.goto(self.url)
-
-    def fill_name_manzana(self):   #KARELIA
-        self.page.get_by_role("searchbox", name="Nombre").fill("manzana")
+    def verify_product_price(self, price):   #KARELIA
+        expect(self.page.get_by_label(self.title).get_by_role("list")).to_contain_text(price)
+    
+    def search_product(self, product_name):   #KARELIA
+        self.page.get_by_role("searchbox", name=product_name).fill(product_name)
 
     def message_no_results(self):    #KARELIA
         expect(self.page.get_by_text("No se encontraron productos")).to_be_visible()

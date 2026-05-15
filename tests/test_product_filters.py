@@ -22,3 +22,18 @@ def test_filter_product_by_name_category_and_price(page: Page):  #GRIMANESA
     
     print("Then the user should see Regadera Metálica")
     products_page.verify_products_result("Regadera Metálica")
+
+
+
+def test_filter_by_value_no_result(page: Page):     #KARELIA scrum-45
+    
+    products_page = ProductsPage(page)
+    
+    print("When the user visits the products page")
+    products_page.open_products_page()
+
+    print("And filters by name with no results “manzana”")
+    products_page.search_product("manzana")
+
+    print("Then they should see the message “No se encontraron productos”")
+    products_page.message_no_results()
