@@ -38,10 +38,10 @@ def test_cart_remove_items_from_the_cart_and_view_summary(page:Page):
     print("then the user should see the update summary")
     cart_page.verify_order_summary("Resumen del pedido")
 
-    print("pursache subtotal 18,50 €")
+    print("pursache subtotal 18.50 €")
     cart_page.verify_pursache_subtotal("Productos (1)18.50 €")
 
-    print("VAT 3,88 €")
+    print("VAT 3.88 €")
     cart_page.verify_VAT("3.88 €")
 
     print("total shipping cost 5 €")

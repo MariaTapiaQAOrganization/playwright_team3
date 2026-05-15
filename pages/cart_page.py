@@ -36,8 +36,8 @@ class CartPage:
     def verify_pursache_subtotal(self, subtotal):
         expect(self.page.get_by_text(subtotal)).to_be_visible()
 
-    def verify_VAT(self, VAT):
-        expect(self.page.get_by_text("VAT (21%)"+VAT)).to_be_visible()
+    def verify_VAT(self, iva):
+        expect(self.page.get_by_text("IVA (21%)"+iva)).to_be_visible()
 
     def verify_shipping(self, shipping):
         expect(self.page.get_by_text(shipping)).to_be_visible()

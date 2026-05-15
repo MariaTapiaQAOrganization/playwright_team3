@@ -79,7 +79,7 @@ def test_checkout_invalid_card (page: Page): #MARIA
     checkout_page.complete_purchase()
 
     print ("should see an error message regarding the card") 
-    checkout_page.verify_card_error_message("Tarjeta de crédito no válida")
+    checkout_page.verify_card_error_message()
 
 
 
