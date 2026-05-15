@@ -48,7 +48,7 @@ def test_cart_remove_items_from_the_cart_and_view_summary(page:Page):
     cart_page.verify_shipping("Envío 5.00 €")
 
     print("total pursache 27.38 €")
-    cart_page.verify_total_price("Total 27.38 €")
+    cart_page.verify_total_price("Total27.38 €")
 
 def test_add_view_summary_and_empty(page: Page):     #KARELIA scrum-46
 
@@ -77,25 +77,44 @@ def test_add_view_summary_and_empty(page: Page):     #KARELIA scrum-46
     products_page.go_to_cart()
   
     print("Then they should see the name “Sansevieria”")
+    cart_page.verify_item_name("Sansevieria")
+
     print("And its category “Plants”")
+    cart_page.verify_category_name("Plantas")
+
     print("And its price “22.00 €”")
-    cart_page.verify_item_visible_all("Sansevieria", "Plantas", "22.00 €")
+    cart_page.verify_price("22.00 €")
 
     print("And they should see the product “Maceta de Barro Grande”")
+    cart_page.verify_item_name("Maceta de Barro Grande")
+
     print("And its category “Pots”")
+    cart_page.verify_category_name("Macetas")
+
     print("And its price “10.50 €”")
-    cart_page.verify_item_visible_all("Maceta de Barro Grande", "Macetas", "10.50 €")
+    cart_page.verify_price("10.50 €")
 
     print("And they should see the order summary with the following details:")
+    cart_page.verify_order_summary("Resumen del pedido")
+
     print("Subtotal, the sum of both items “32.50”")
+    cart_page.verify_pursache_subtotal("Productos (2)32.50 €")
+
     print("VAT 21% “6.83”")
-    print("And they should see the delivery cost “5.00”")
+    cart_page.verify_VAT("6.83 €")
+
+    print("And they should see the shipping cost “5.00”")
+    cart_page.verify_shipping("Envío 5.00 €")
+
     print("And they should see the total “44.33”")
-    cart_page.verify_summary("32.50 €", "6.83 €", "5.00 €", "44.33 €")
+    cart_page.verify_total_price("Total44.33 €")
 
     print("When they click on empty cart")
+    cart_page.empty_cart_button()
+
     print("Then they should see the message “Tu carrito está vacío”")
-    cart_page.empty_cart()
+    cart_page.empty_cart_message()
+
 
 
 

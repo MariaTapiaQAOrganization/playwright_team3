@@ -14,9 +14,12 @@ class CartPage:
 
     def verify_order_summary(self, text):
         expect(self.page.get_by_text(text)).to_be_visible()
+    
+    def verify_item_name(self, product_name):
+        expect(self.page.get_by_text(product_name)).to_be_visible()
 
     def verify_item_not_visible(self, product_name):
-         expect(self.page.get_by_text(product_name)).not_to_be_visible()
+        expect(self.page.get_by_text(product_name)).not_to_be_visible()
     
     def verify_item_visible(self, product_name):
         expect(self.page.get_by_text(product_name)).to_be_visible()
@@ -40,16 +43,7 @@ class CartPage:
         expect(self.page.get_by_text("IVA (21%)"+iva)).to_be_visible()
 
     def verify_shipping(self, shipping):
-        expect(self.page.get_by_text(shipping)).to_be_visible()
-
-    ###KARELIA.  
-
-    def __init__(self, page: Page):
-        self.page = page
-        self.utl = "https://web-qa.dev.adalab.es/products"
-
-    def open_product_page(self):
-        self.page.goto(self.url)
+        expect(self.page.get_by_text("5.00")).to_be_visible()
     
     def search_product(self, product_name):
         self.page.get_by_role("searchbox", name="Nombre").fill(product_name)
@@ -59,25 +53,19 @@ class CartPage:
     
     def clear_filter(self):
         self.page.get_by_role("button", name="Quitar filtros y ver todos").click()
-    
-    def search_product(self, product_name):
-        self.page.get_by_role("searchbox", name="Nombre").fill(product_name)
 
-    
     def click_on_cart(self):
         self.page.get_by_role("link", name="Carrito de compra").click()
 
-    def verify_item_visible_all(self, product_name, category, price):
-        expect(self.page.get_by_role("heading", name=product_name)).to_be_visible()
-        expect(self.page.get_by_text(category)).to_be_visible()
-        expect(self.page.get_by_text(price)).to_be_visible()
-
-    def empty_cart(self):
+    def empty_cart_button(self):
         self.page.get_by_role("button", name="Vaciar Carrito").click()
+    
+    def empty_cart_message(self):
         expect(self.page.get_by_text("Tu carrito está vacío")).to_be_visible()
-
+    
     def click_finish_purchase(self):
         self.page.get_by_role("link", name="Finalizar Compra").click()
+
 
 
 
