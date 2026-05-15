@@ -22,9 +22,6 @@ class ProductsPage:
 
     def verify_product_price(self, price):   #KARELIA
         expect(self.page.get_by_label(self.title).get_by_role("list")).to_contain_text(price)
-    
-    def search_product(self, product_name):   #KARELIA
-        self.page.get_by_role("searchbox", name=product_name).fill(product_name)
 
     def message_no_results(self):    #KARELIA
         expect(self.page.get_by_text("No se encontraron productos")).to_be_visible()
