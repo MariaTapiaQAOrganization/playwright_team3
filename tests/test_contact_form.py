@@ -1,5 +1,5 @@
 
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
 from pages.contact_page import ContactPage
 
 
@@ -43,7 +43,7 @@ def test_contact_required_message_empty(page: Page): #GRIMANESA
     contact_page.press_send_contact()
 
     print("then should see and error message el mensaje es obligatorio")
-    expect(page.get_by_text("El mensaje es obligatorio")).to_be_visible()
+    contact_page.verify_message_form("El mensaje es obligatorio")
 
 
 def test_contact_invalid_email(page: Page): #GRIMANESA
@@ -66,7 +66,7 @@ def test_contact_invalid_email(page: Page): #GRIMANESA
     contact_page.press_send_contact()
 
     print("Then should see an error message el formato de email no es válido")
-    expect(page.get_by_text("El formato del email no es válido")).to_be_visible()
+    contact_page.verify_message_form("El formato del email no es válido")
 
 
 
