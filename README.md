@@ -1,4 +1,4 @@
-# Proyecto QA Manual y Automatizado de la web Bootcamp QA
+# Proyecto QA Manual y Automatizado de la web Vida Verde
 
 En este proyecto se ha llevado a cabo un proceso completo de aseguramiento de la calidad (QA) sobre la funcionalidad principal de la web: https://web-qa.dev.adalab.es/
 El proyecto se ha realizado en equipo siguiendo metodología ágil Scrum y BDD para el diseño de las pruebas antes del desarrollo, siguiendo buenas prácticas de testing.
